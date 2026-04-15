@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>마이폴학교 — 입시 준비 대신 연구를 합니다</title>
+
+  <!-- Google Analytics (GA4) -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script> -->
+
+  <!-- Meta Pixel -->
+  <!-- <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.getElementsByTagName.insertBefore(t,s)}
+    (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'YOUR_PIXEL_ID');
+    fbq('track', 'PageView');
+  </script> -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+      background: #fff;
+      color: #111;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== DESIGN TOKENS ===== */
+    :root {
+      --navy: #0B1437;
+      --navy-light: #1A2755;
+      --gold: #D4A843;
+      --gold-light: #F5C842;
+      --accent: #007a3d;
+      --green: #007a3d;
+      --green-light: #009E4F;
+      --red: #E53E3E;
+      --gray-100: #F7F8FA;
+      --gray-200: #EAECF0;
+      --gray-500: #6B7280;
+      --gray-800: #1F2937;
+      --white: #FFFFFF;
+      --radius: 16px;
+      --radius-sm: 8px;
+      --shadow: 0 8px 32px rgba(11,20,55,0.12);
+      --shadow-lg: 0 20px 60px rgba(11,20,55,0.18);
+    }
+
+    /* ===== SCROLL ANIMATIONS ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+
+    /* ===== STICKY HEADER ===== */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(11,20,55,0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.3s;
+    }
+    .header-logo img {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+    .header-cta {
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 8px 16px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .header-cta:hover { transform: scale(1.05); background: var(--gold-light); }
+
+    /* ===== SECTION WRAPPER ===== */
+    .section { padding: 72px 20px; }
+    .section-inner { max-width: 760px; margin: 0 auto; }
+    .section-tag {
+      display: inline-block;
+      background: rgba(212,168,67,0.15);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 5px 12px;
+      border-radius: 30px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .section-tag.white {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 900;
+      line-height: 1.25;
+      letter-spacing: -1px;
+    }
+    .section-title.white { color: #fff; }
+    .section-desc {
+      margin-top: 16px;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--gray-500);
+    }
+    .section-desc.white { color: rgba(255,255,255,0.7); }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100svh;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 20px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 20%, rgba(0,122,61,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(212,168,67,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 30px;
+      margin-bottom: 24px;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: #4ADE80;
+      border-radius: 50%;
+      animation: blink 1.5s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .hero-title {
+      font-size: clamp(2rem, 7vw, 3.6rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.15;
+      letter-spacing: -2px;
+      margin-bottom: 8px;
+    }
+    .hero-title .highlight {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 3.5vw, 1.35rem);
+      color: rgba(255,255,255,0.75);
+      line-height: 1.6;
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+    .hero-sub strong { color: #fff; font-weight: 700; }
+    .hero-cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      width: 100%;
+      max-width: 340px;
+    }
+    .btn-primary {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 1rem;
+      padding: 18px 32px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 24px rgba(212,168,67,0.35);
+      letter-spacing: -0.3px;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(212,168,67,0.45); }
+    .btn-secondary {
+      width: 100%;
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      padding: 12px;
+      border: none;
+      cursor: pointer;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 24px;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      width: 100%;
+      max-width: 460px;
+      justify-content: center;
+    }
+    .hero-stat {
+      text-align: center;
+      flex: 1;
+    }
+    .hero-stat-num {
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.55);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* Admission list below hero */
+    .admission-ticker {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-top: 32px;
+      width: 100%;
+      max-width: 500px;
+    }
+    .admission-ticker-title {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .admission-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      animation: slideInItem 0.5s ease forwards;
+      opacity: 0;
+    }
+    .admission-item:last-child { border-bottom: none; }
+    @keyframes slideInItem {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .admission-dot {
+      width: 8px; height: 8px;
+      background: #4ADE80;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .admission-text {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.75);
+    }
+    .admission-badge-tag {
+      margin-left: auto;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .badge-univ { background: rgba(0,122,61,0.2); color: #4ADE80; }
+    .badge-grad { background: rgba(212,168,67,0.2); color: var(--gold); }
+    .badge-paper { background: rgba(74,222,128,0.15); color: #4ADE80; }
+
+    /* ===== SECTION 2: PAIN POINTS ===== */
+    #pain {
+      background: var(--gray-100);
+      padding: 72px 20px;
+    }
+    .pain-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 36px;
+    }
+    .pain-card {
+      display: flex;
+      gap: 16px;
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 24px;
+      border-left: 4px solid var(--red);
+      box-shadow: var(--shadow);
+    }
+    .pain-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .pain-card-title { font-size: 1rem; font-weight: 700; color: var(--gray-800); margin-bottom: 4px; }
+    .pain-card-desc { font-size: 0.88rem; color: var(--gray-500); line-height: 1.6; }
+    .pain-bottom {
+      margin-top: 36px;
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .pain-bottom-text {
+      font-size: clamp(1.1rem, 4vw, 1.4rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.5;
+      letter-spacing: -0.5px;
+    }
+    .pain-bottom-text span { color: var(--gold); }
+
+    /* ===== SECTION 3: RESULTS ===== */
+    #results {
+      background: var(--navy);
+      padding: 72px 20px;
+      text-align: center;
+    }
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 36px;
+    }
+    .result-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 32px 20px;
+      text-align: center;
+    }
+    @media (min-width: 480px) {
+      .results-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .result-title {
+      font-size: clamp(0.85rem, 2.8vw, 1rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .result-num {
+      font-size: clamp(2rem, 7vw, 3rem);
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .result-label {
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+    }
+
+    /* ===== SECTION 4: WHY — PBL ===== */
+    #why {
+      background: #fff;
+      padding: 72px 20px;
+    }
+    .why-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 36px;
+    }
+    .why-pillar {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      background: var(--gray-100);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .pillar-icon {
+      width: 52px; height: 52px;
+      background: var(--navy);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .pillar-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .pillar-desc { font-size: 0.85rem; color: var(--gray-500); line-height: 1.65; }
+    .why-pbl-banner {
+      margin-top: 32px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .pbl-title {
+      font-size: clamp(1.1rem, 4vw, 1.5rem);
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .pbl-sub { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+    .pbl-equal {
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin: 16px 0;
+    }
+
+    /* ===== SECTION 5: CURRICULUM ===== */
+    #curriculum {
+      background: var(--gray-100);
+      padding: 72px 20px;
+    }
+    .curriculum-steps {
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .step-item {
+      display: flex;
+      gap: 20px;
+      padding-bottom: 32px;
+      position: relative;
+    }
+    .step-item::after {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 44px;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--navy), transparent);
+    }
+    .step-item:last-child::after { display: none; }
+    .step-num {
+      width: 40px; height: 40px;
+      background: var(--navy);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 900;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+    .step-num.gold { background: var(--gold); color: var(--navy); }
+    .step-body { padding-top: 8px; }
+    .step-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .step-desc { font-size: 0.85rem; color: var(--gray-500); line-height: 1.6; }
+    .step-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .step-tag {
+      background: rgba(11,20,55,0.08);
+      color: var(--navy);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    /* ===== SECTION 6: NEWS CAROUSEL ===== */
+    #news {
+      background: #fff;
+      padding: 72px 20px;
+      overflow: hidden;
+    }
+    .news-scroll-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 8px;
+      margin-top: 32px;
+      margin-left: -20px;
+      margin-right: -20px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .news-scroll-wrap::-webkit-scrollbar { display: none; }
+    .news-track {
+      display: flex;
+      gap: 16px;
+      width: max-content;
+    }
+    .news-card {
+      width: 260px;
+      flex-shrink: 0;
+      background: var(--gray-100);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.25s;
+    }
+    .news-card:hover { transform: translateY(-4px); }
+    .news-card-thumb {
+      height: 140px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .news-card-thumb-label {
+      position: absolute;
+      top: 12px; left: 12px;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .news-card-thumb-icon { font-size: 2.5rem; opacity: 0.4; }
+    .news-card-body { padding: 16px; }
+    .news-card-title { font-size: 0.88rem; font-weight: 700; line-height: 1.5; margin-bottom: 6px; }
+    .news-card-meta { font-size: 0.75rem; color: var(--gray-500); }
+    .news-scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--gray-500);
+      margin-top: 16px;
+    }
+
+    /* ===== SECTION 7: COMPARISON ===== */
+    #compare {
+      background: var(--navy);
+      padding: 72px 20px;
+    }
+    .compare-table {
+      margin-top: 36px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .compare-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      background: rgba(255,255,255,0.05);
+    }
+    .compare-header div {
+      padding: 14px 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-align: center;
+    }
+    .compare-header .mypaul-head {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .compare-header .label-head { color: rgba(255,255,255,0.5); }
+    .compare-header .general-head { color: rgba(255,255,255,0.6); }
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .compare-row div {
+      padding: 14px 12px;
+      font-size: 0.82rem;
+      text-align: center;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.4;
+    }
+    .compare-row .label-col {
+      color: rgba(255,255,255,0.45);
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .compare-row .mypaul-col {
+      background: rgba(212,168,67,0.07);
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .compare-row .mypaul-col .check { font-size: 1rem; }
+
+    /* ===== SECTION 8: STUDENT STORY ===== */
+    #story {
+      background: var(--gray-100);
+      padding: 72px 20px;
+      text-align: center;
+    }
+    .story-scroll-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      margin-top: 32px;
+      margin-left: -20px;
+      margin-right: -20px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .story-scroll-wrap::-webkit-scrollbar { display: none; }
+    .story-track {
+      display: flex;
+      gap: 16px;
+      width: max-content;
+      padding-bottom: 4px;
+      padding-right: 20px;
+    }
+    .story-card {
+      width: 280px;
+      flex-shrink: 0;
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      text-align: left;
+    }
+    .story-quote {
+      font-size: 2rem;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .story-text {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--gray-800);
+      margin-bottom: 16px;
+    }
+    .story-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .story-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .story-name { font-size: 0.85rem; font-weight: 700; }
+    .story-role { font-size: 0.75rem; color: var(--gray-500); }
+    /* YouTube Embed */
+    .youtube-embed-wrap {
+      margin-top: 32px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      background: #000;
+      aspect-ratio: 16/9;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .youtube-embed-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .yt-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+      font-size: 0.8rem;
+      color: var(--gray-500);
+    }
+
+    /* ===== SECTION 9: TRUST ===== */
+    #trust {
+      background: #fff;
+      padding: 72px 20px;
+    }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 36px;
+    }
+    .trust-card {
+      background: var(--gray-100);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .trust-icon { font-size: 2rem; margin-bottom: 10px; }
+    .trust-title { font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; }
+    .trust-desc { font-size: 0.78rem; color: var(--gray-500); line-height: 1.5; }
+    .trust-secret {
+      margin-top: 16px;
+      grid-column: 1 / -1;
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .trust-secret-icon { font-size: 2rem; flex-shrink: 0; }
+    .trust-secret-text { color: rgba(255,255,255,0.85); font-size: 0.88rem; line-height: 1.65; }
+    .trust-secret-text strong { color: var(--gold); }
+
+    /* ===== SECTION 10: FAQ ===== */
+    #faq {
+      background: var(--gray-100);
+      padding: 72px 20px;
+    }
+    .faq-list {
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .faq-item {
+      background: #fff;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+    }
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      cursor: pointer;
+      font-size: 0.92rem;
+      font-weight: 600;
+      gap: 12px;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .faq-q::after {
+      content: '+';
+      font-size: 1.4rem;
+      color: var(--gray-500);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .faq-item.open .faq-q::after {
+      transform: rotate(45deg);
+      color: var(--navy);
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+    .faq-item.open .faq-a {
+      max-height: 400px;
+    }
+    .faq-a-inner {
+      padding: 0 20px 18px;
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      line-height: 1.75;
+    }
+
+    /* ===== SECTION 11: URGENCY / WAITLIST ===== */
+    #waitlist {
+      background: linear-gradient(135deg, var(--navy), #0D1B4D);
+      padding: 72px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #waitlist::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -20%;
+      width: 140%;
+      height: 200%;
+      background: radial-gradient(ellipse 60% 40% at 60% 60%, rgba(212,168,67,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .waitlist-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(229,62,62,0.15);
+      border: 1px solid rgba(229,62,62,0.3);
+      color: #FCA5A5;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 30px;
+      margin-bottom: 20px;
+    }
+    .waitlist-badge::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: blink 1.5s infinite;
+    }
+    .schedule-cards {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .schedule-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .schedule-date {
+      background: var(--gold);
+      color: var(--navy);
+      border-radius: var(--radius-sm);
+      padding: 8px 10px;
+      text-align: center;
+      min-width: 48px;
+      flex-shrink: 0;
+    }
+    .schedule-month { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; }
+    .schedule-day { font-size: 1.3rem; font-weight: 900; line-height: 1; }
+    .schedule-info { text-align: left; }
+    .schedule-title { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
+    .schedule-detail { font-size: 0.78rem; color: rgba(255,255,255,0.55); }
+    .schedule-spots {
+      margin-left: auto;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #FCA5A5;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .waitlist-cta {
+      margin-top: 32px;
+    }
+    .btn-big {
+      width: 100%;
+      max-width: 420px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      font-size: 1.1rem;
+      font-weight: 900;
+      padding: 22px 32px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(212,168,67,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      letter-spacing: -0.5px;
+    }
+    .btn-big:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(212,168,67,0.5); }
+    .waitlist-note {
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #0A0E1A;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .footer-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
+      margin: 0 auto 12px;
+    }
+    .footer-info {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      line-height: 2;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-link {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.45);
+      cursor: pointer;
+    }
+
+    /* ===== FLOATING CTA ===== */
+    .float-cta {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 900;
+      background: rgba(11,20,55,0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 14px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 -8px 32px rgba(0,0,0,0.3);
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .float-cta.show { transform: translateY(0); }
+    .float-cta-text {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+    }
+    .float-cta-text strong { color: #FCA5A5; }
+    .float-cta-btn {
+      width: 100%;
+      max-width: 360px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 1rem;
+      padding: 16px 24px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(212,168,67,0.4);
+      letter-spacing: -0.3px;
+      transition: transform 0.2s;
+    }
+    .float-cta-btn:hover { transform: translateY(-1px); }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0,0,0,0.75);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-sheet {
+      background: #fff;
+      width: 100%;
+      max-width: 520px;
+      border-radius: 24px 24px 0 0;
+      padding: 28px 24px 40px;
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      max-height: 92svh;
+      overflow-y: auto;
+    }
+    .modal-overlay.open .modal-sheet {
+      transform: translateY(0);
+    }
+    .modal-handle {
+      width: 40px; height: 4px;
+      background: var(--gray-200);
+      border-radius: 2px;
+      margin: 0 auto 24px;
+    }
+    .modal-title {
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+    .modal-sub { font-size: 0.85rem; color: var(--gray-500); margin-bottom: 24px; }
+    .form-group { margin-bottom: 16px; }
+    .form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--gray-800);
+    }
+    .form-label span { color: var(--red); }
+    .form-input {
+      width: 100%;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      padding: 13px 14px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--gray-800);
+      outline: none;
+      transition: border-color 0.2s;
+      background: #fff;
+      -webkit-appearance: none;
+    }
+    .form-input:focus { border-color: var(--navy); }
+    .form-select {
+      width: 100%;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      padding: 13px 14px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--gray-800);
+      outline: none;
+      background: #fff;
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+    .form-select:focus { border-color: var(--navy); }
+    .form-radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .form-radio-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+    .form-radio-label input { accent-color: var(--navy); width: 16px; height: 16px; cursor: pointer; }
+    .form-check { display: flex; align-items: flex-start; gap: 10px; }
+    .form-check input { accent-color: var(--navy); width: 16px; height: 16px; margin-top: 2px; cursor: pointer; flex-shrink: 0; }
+    .form-check-text { font-size: 0.8rem; color: var(--gray-500); line-height: 1.5; }
+    .form-check-text a { color: var(--navy); text-decoration: underline; }
+    .form-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      color: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 900;
+      padding: 18px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+      letter-spacing: -0.3px;
+      transition: transform 0.2s;
+    }
+    .form-submit:hover { transform: translateY(-1px); }
+    .modal-close {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: var(--gray-100);
+      border: none;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-500);
+    }
+
+    /* Success state */
+    .form-success {
+      text-align: center;
+      padding: 32px 0;
+      display: none;
+    }
+    .form-success.show { display: block; }
+    .success-icon { font-size: 3rem; margin-bottom: 16px; }
+    .success-title { font-size: 1.2rem; font-weight: 900; margin-bottom: 8px; }
+    .success-desc { font-size: 0.85rem; color: var(--gray-500); line-height: 1.6; }
+
+    /* ===== COUNTER ANIMATION ===== */
+    .counter { display: inline-block; }
+
+    /* ===== RESPONSIVE ===== */
+
+    @media (min-width: 760px) {
+      .section { padding: 96px 40px; }
+      /* 히어로 버튼 중앙 정렬 */
+      #hero { align-items: center; }
+      .hero-cta-group {
+        flex-direction: row;
+        justify-content: center;
+        max-width: none;
+        width: auto;
+      }
+      .btn-primary { width: auto; min-width: 240px; }
+      .btn-secondary { width: auto; }
+      .pain-cards { flex-direction: row; flex-wrap: wrap; }
+      .pain-card { flex: 1; min-width: 200px; }
+      .why-pillars { flex-direction: row; }
+      .why-pillar { flex: 1; flex-direction: column; }
+      .pillar-icon { margin-bottom: 4px; }
+      .trust-grid { grid-template-columns: repeat(4, 1fr); }
+      .trust-secret { grid-column: 1 / -1; }
+      .modal-overlay { align-items: center; }
+      .modal-sheet { border-radius: 24px; max-height: 80svh; margin-bottom: 0; }
+      /* PC에서 섹션 타이틀 줄바꿈 없이 한 줄 */
+      .section-title { white-space: nowrap; font-size: clamp(1.3rem, 2.2vw, 1.9rem); overflow: hidden; text-overflow: ellipsis; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-logo">
+      <img src="https://mypaul.org/wp-content/uploads/2023/04/logo-w.png" alt="마이폴학교" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+      <span style="display:none;color:#fff;font-size:1.1rem;font-weight:900">마이<span style="color:var(--gold)">폴</span>학교</span>
+    </div>
+    <button class="header-cta" onclick="window.open('https://docs.google.com/forms/d/1M9j_PlZ2y4TAlEY8SRbnjgv0aroCeRGwh-gGqXmvBpc/viewform','_blank')">입학설명회 신청</button>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section id="hero">
+    <div class="hero-badge">충청북도 대안교육기관 1호 인증</div>
+
+    <h1 class="hero-title reveal">
+      입시 준비 대신 <span class="highlight">연구를 합니다.</span>
+    </h1>
+    <p class="hero-sub reveal delay-1">
+      내가 원하는 관심사로 <strong>10대에 대학원을 가는 미래학교</strong>
+    </p>
+
+    <div class="hero-cta-group reveal delay-2">
+      <button class="btn-primary" onclick="window.open('https://docs.google.com/forms/d/1M9j_PlZ2y4TAlEY8SRbnjgv0aroCeRGwh-gGqXmvBpc/viewform','_blank')">
+        📋 무료 입학설명회 신청하기
+      </button>
+      <button class="btn-secondary" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">
+        진학 성과 보러가기 →
+      </button>
+    </div>
+
+    <div class="admission-ticker reveal delay-3">
+      <div class="admission-ticker-title">최근 진학 성과</div>
+      <div class="admission-item" style="animation-delay:0.3s">
+        <div class="admission-dot"></div>
+        <span class="admission-text">김○○ 학생 — KAIST 대학원 바이오 전공 합격</span>
+        <span class="admission-badge-tag badge-grad">대학원</span>
+      </div>
+      <div class="admission-item" style="animation-delay:0.5s">
+        <div class="admission-dot"></div>
+        <span class="admission-text">이○○ 학생 — 국제 청소년 환경 연구 논문 게재</span>
+        <span class="admission-badge-tag badge-paper">논문</span>
+      </div>
+      <div class="admission-item" style="animation-delay:0.7s">
+        <div class="admission-dot"></div>
+        <span class="admission-text">박○○ 학생 — 연세대학교 조기 입학</span>
+        <span class="admission-badge-tag badge-univ">대학</span>
+      </div>
+      <div class="admission-item" style="animation-delay:0.9s">
+        <div class="admission-dot"></div>
+        <span class="admission-text">최○○ 학생 — AI 특허 출원 및 스타트업 설립</span>
+        <span class="admission-badge-tag badge-paper">특허</span>
+      </div>
+    </div>
+
+    <div class="hero-stats reveal delay-4">
+      <div class="hero-stat">
+        <div class="hero-stat-num">
+          <span class="counter" data-target="48">0</span>%
+        </div>
+        <div class="hero-stat-label">대학원<br>진학율</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">
+          <span class="counter" data-target="100">0</span>%
+        </div>
+        <div class="hero-stat-label">원하는 분야<br>진로 달성</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">
+          <span class="counter" data-target="3">0</span>년
+        </div>
+        <div class="hero-stat-label">평균<br>조기 진학</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PAIN POINTS ===== -->
+  <section id="pain" class="section">
+    <div class="section-inner">
+      <span class="section-tag">지금의 교육 문제</span>
+      <h2 class="section-title reveal">혹시 이런 고민, 하고 계신가요?</h2>
+
+      <div class="pain-cards">
+        <div class="pain-card reveal delay-1">
+          <div class="pain-icon">📚</div>
+          <div>
+            <div class="pain-card-title">시험을 위해 외우기만 하는 공부</div>
+            <div class="pain-card-desc">정작 왜 배우는지 모른 채, 점수만을 위한 반복 학습에 지쳐가고 있진 않나요?</div>
+          </div>
+        </div>
+        <div class="pain-card reveal delay-2">
+          <div class="pain-icon">📊</div>
+          <div>
+            <div class="pain-card-title">점수로만 평가되는 가능성</div>
+            <div class="pain-card-desc">숫자로 환산되는 성적표가 우리 아이의 모든 것을 결정하는 현실이 불안하지 않으신가요?</div>
+          </div>
+        </div>
+        <div class="pain-card reveal delay-3">
+          <div class="pain-icon">⏳</div>
+          <div>
+            <div class="pain-card-title">진짜 좋아하는 걸 찾지 못한 채</div>
+            <div class="pain-card-desc">10대 황금기를 입시 준비로만 채우다가 정작 자신이 무엇을 원하는지 모르게 됩니다.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pain-bottom reveal">
+        <div class="pain-bottom-text">
+          아이의 인생을 결정하는 중요한 시기,<br>
+          <span>교육 방법 이제는 달라져야 합니다.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RESULTS ===== -->
+  <section id="results" class="section">
+    <div class="section-inner">
+      <span class="section-tag white">증명된 성과</span>
+      <h2 class="section-title white reveal">마이폴학교의 학생들은 결과로 증명합니다.</h2>
+      <p class="section-desc white reveal delay-1">
+        시험 없이도, 경쟁 없이도 — 오직 관심사와 연구로 만들어낸 실제 성과입니다.
+      </p>
+
+      <div class="results-grid">
+        <div class="result-card reveal delay-1">
+          <div class="result-title">매년 논문·특허<br>발표 등재</div>
+          <div class="result-num"><span class="counter" data-target="48">0</span>%</div>
+          <div class="result-label">연구 결과를 실제 성과로</div>
+        </div>
+        <div class="result-card reveal delay-2">
+          <div class="result-title">글로벌 해외연구활동<br>및 발표 무대</div>
+          <div class="result-num"><span class="counter" data-target="52">0</span>%</div>
+          <div class="result-label">세계 무대로 나아가는 학생들</div>
+        </div>
+        <div class="result-card reveal delay-3">
+          <div class="result-title">10대 연구자·특허자<br>창업가 배출</div>
+          <div class="result-num"><span class="counter" data-target="100">0</span>%</div>
+          <div class="result-label">원하는 분야 진로 달성률</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHY — PBL ===== -->
+  <section id="why" class="section">
+    <div class="section-inner">
+      <span class="section-tag">교육 철학</span>
+      <h2 class="section-title reveal">이 모든 게 가능한 이유는 단 하나입니다.</h2>
+      <p class="section-desc reveal delay-1">
+        내가 좋아하는 걸 찾고, 거기에 몰두시키는 교육을 합니다.
+      </p>
+
+      <div class="why-pillars">
+        <div class="why-pillar reveal delay-1">
+          <div class="pillar-icon">🔍</div>
+          <div>
+            <div class="pillar-title">관심사 기반 학습</div>
+            <div class="pillar-desc">학생이 진짜 좋아하는 분야를 체계적인 테스트와 탐색으로 발굴합니다. 흥미가 곧 교과서가 됩니다.</div>
+          </div>
+        </div>
+        <div class="why-pillar reveal delay-2">
+          <div class="pillar-icon">🔬</div>
+          <div>
+            <div class="pillar-title">연구 중심 교육</div>
+            <div class="pillar-desc">단순 암기가 아닌 탐구와 실험, 논문 작성 과정을 통해 진짜 실력과 포트폴리오를 쌓습니다.</div>
+          </div>
+        </div>
+        <div class="why-pillar reveal delay-3">
+          <div class="pillar-icon">🎓</div>
+          <div>
+            <div class="pillar-title">대학 과정 선행</div>
+            <div class="pillar-desc">검정고시와 학점 취득을 병행하며, 10대에 이미 대학원 수준의 연구를 경험합니다.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-pbl-banner reveal delay-4">
+        <div class="pbl-sub" style="color:rgba(255,255,255,0.45);font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">세 가지의 교육 방식이 결합된</div>
+        <div class="pbl-title">프로젝트 기반 수업 (PBL)</div>
+        <div style="color:rgba(255,255,255,0.6);font-size:0.95rem;margin:12px 0 6px">관심사 × 연구 × 학점</div>
+        <div style="font-size:0.9rem;color:rgba(255,255,255,0.4);margin-bottom:10px">↓</div>
+        <div style="display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);font-size:clamp(1.1rem,4vw,1.5rem);font-weight:900;padding:10px 28px;border-radius:50px;letter-spacing:-0.5px;">10대 대학원 진학</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CURRICULUM ===== -->
+  <section id="curriculum" class="section">
+    <div class="section-inner">
+      <span class="section-tag">교육 과정</span>
+      <h2 class="section-title reveal">4단계로 완성되는 마이폴 커리큘럼</h2>
+
+      <div class="curriculum-steps">
+        <div class="step-item reveal delay-1">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <div class="step-title">관심사 발굴 테스트</div>
+            <div class="step-desc">체계적인 진단 검사와 상담을 통해 학생의 진짜 강점과 관심 분야를 정밀하게 찾아냅니다.</div>
+            <div class="step-tags">
+              <span class="step-tag">적성 탐색</span>
+              <span class="step-tag">1:1 심층 상담</span>
+              <span class="step-tag">관심사 매핑</span>
+            </div>
+          </div>
+        </div>
+        <div class="step-item reveal delay-2">
+          <div class="step-num gold">02</div>
+          <div class="step-body">
+            <div class="step-title">연구 및 논문 준비</div>
+            <div class="step-desc">박사급 멘토와 함께 연구 주제를 설정하고, 실험·분석·작성까지 논문 전 과정을 진행합니다.</div>
+            <div class="step-tags">
+              <span class="step-tag">연구 설계</span>
+              <span class="step-tag">논문 작성</span>
+              <span class="step-tag">특허 출원</span>
+            </div>
+          </div>
+        </div>
+        <div class="step-item reveal delay-3">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <div class="step-title">검정고시 + 학점 취득</div>
+            <div class="step-desc">연구와 병행하여 검정고시를 준비하고 학점은행제를 통해 공식 학력을 갖춥니다.</div>
+            <div class="step-tags">
+              <span class="step-tag">검정고시</span>
+              <span class="step-tag">학점은행제</span>
+              <span class="step-tag">학력 취득</span>
+            </div>
+          </div>
+        </div>
+        <div class="step-item reveal delay-4">
+          <div class="step-num gold">04</div>
+          <div class="step-body">
+            <div class="step-title">대학 / 대학원 / 기술 창업 진학</div>
+            <div class="step-desc">축적된 연구 포트폴리오와 논문 실적으로 국내외 대학원에 지원하거나 기술 창업으로 독립합니다.</div>
+            <div class="step-tags">
+              <span class="step-tag">대학원 진학</span>
+              <span class="step-tag">해외 대학</span>
+              <span class="step-tag">기술 창업</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NEWS ===== -->
+  <section id="news" class="section">
+    <div class="section-inner">
+      <span class="section-tag">언론 & 활동</span>
+      <h2 class="section-title reveal">마이폴학교를 주목하는 이유</h2>
+    </div>
+
+    <div class="news-scroll-wrap reveal">
+      <div class="news-track">
+        <div class="news-card">
+          <div class="news-card-thumb" style="background:#1A2755">
+            <span class="news-card-thumb-label">언론 기사</span>
+            <span class="news-card-thumb-icon">📰</span>
+          </div>
+          <div class="news-card-body">
+            <div class="news-card-title">"10대 연구자 양성하는 대안학교, 마이폴학교의 실험"</div>
+            <div class="news-card-meta">조선에듀 · 2024</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-card-thumb" style="background:#1A3A2A">
+            <span class="news-card-thumb-label">도서 발간</span>
+            <span class="news-card-thumb-icon">📖</span>
+          </div>
+          <div class="news-card-body">
+            <div class="news-card-title">마이폴 교육 철학을 담은 단행본 출간</div>
+            <div class="news-card-meta">마이폴 출판 · 2023</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-card-thumb" style="background:#2A1A3A">
+            <span class="news-card-thumb-label">해외 활동</span>
+            <span class="news-card-thumb-icon">✈️</span>
+          </div>
+          <div class="news-card-body">
+            <div class="news-card-title">일본 · 미국 연구 협력 기관 방문 및 발표</div>
+            <div class="news-card-meta">마이폴 해외활동 · 2024</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-card-thumb" style="background:#3A2A1A">
+            <span class="news-card-thumb-label">수상</span>
+            <span class="news-card-thumb-icon">🏆</span>
+          </div>
+          <div class="news-card-body">
+            <div class="news-card-title">국제 청소년 과학 경진대회 최우수상 수상</div>
+            <div class="news-card-meta">글로벌 사이언스 · 2024</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-card-thumb" style="background:#1A2A3A">
+            <span class="news-card-thumb-label">방송</span>
+            <span class="news-card-thumb-icon">🎬</span>
+          </div>
+          <div class="news-card-body">
+            <div class="news-card-title">EBS 다큐멘터리 "미래학교" 편 촬영 참여</div>
+            <div class="news-card-meta">EBS · 2023</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section-inner">
+      <div class="news-scroll-hint reveal">
+        <span>←</span> 좌우로 밀어 더 보기 <span>→</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMPARISON ===== -->
+  <section id="compare" class="section">
+    <div class="section-inner">
+      <span class="section-tag white">차별화된 교육</span>
+      <h2 class="section-title white reveal">
+        일반 교육 vs 마이폴학교
+      </h2>
+
+      <div class="compare-table reveal delay-1">
+        <div class="compare-header">
+          <div class="label-head">구분</div>
+          <div class="general-head">일반 교육</div>
+          <div class="mypaul-head">마이폴학교</div>
+        </div>
+        <div class="compare-row">
+          <div class="label-col">학습 방식</div>
+          <div>암기·문제풀이</div>
+          <div class="mypaul-col"><span class="check">✓</span> 연구·탐구</div>
+        </div>
+        <div class="compare-row">
+          <div class="label-col">평가 기준</div>
+          <div>시험 점수</div>
+          <div class="mypaul-col"><span class="check">✓</span> 논문·포트폴리오</div>
+        </div>
+        <div class="compare-row">
+          <div class="label-col">진로 결정</div>
+          <div>대학 입학 후</div>
+          <div class="mypaul-col"><span class="check">✓</span> 10대부터</div>
+        </div>
+        <div class="compare-row">
+          <div class="label-col">커리큘럼</div>
+          <div>국가 표준</div>
+          <div class="mypaul-col"><span class="check">✓</span> 관심사 맞춤</div>
+        </div>
+        <div class="compare-row">
+          <div class="label-col">졸업 후</div>
+          <div>대학 입시</div>
+          <div class="mypaul-col"><span class="check">✓</span> 대학원·창업</div>
+        </div>
+        <div class="compare-row">
+          <div class="label-col">교사진</div>
+          <div>임용 교사</div>
+          <div class="mypaul-col"><span class="check">✓</span> 박사급 전문 멘토</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STUDENT STORY ===== -->
+  <section id="story" class="section">
+    <div class="section-inner" style="text-align:center">
+      <span class="section-tag">학생 스토리</span>
+      <h2 class="section-title reveal">
+        직접 경험한 학생들의 이야기
+      </h2>
+      <p class="section-desc reveal delay-1">마이폴에서 꿈을 찾은 학생들이 직접 전합니다.</p>
+    </div>
+
+    <div class="story-scroll-wrap reveal">
+      <div class="story-track">
+        <div class="story-card">
+          <div class="story-quote">"</div>
+          <div class="story-text">중학교 때까지 수학을 왜 배우는지 몰랐어요. 마이폴학교에서 AI 연구 프로젝트를 하면서 수학이 얼마나 강력한 도구인지 직접 느꼈고, 16살에 논문을 쓰게 됐어요.</div>
+          <div class="story-author">
+            <div class="story-avatar">K</div>
+            <div>
+              <div class="story-name">김○○ (17세)</div>
+              <div class="story-role">KAIST 대학원 바이오AI 전공 진학</div>
+            </div>
+          </div>
+        </div>
+        <div class="story-card">
+          <div class="story-quote">"</div>
+          <div class="story-text">처음엔 부모님도 걱정하셨어요. 근데 1년 만에 특허를 출원하고 스타트업을 창업했어요. 지금은 제가 직접 투자자 앞에서 발표해요. 일반 고등학생이었으면 상상도 못 했을 일이에요.</div>
+          <div class="story-author">
+            <div class="story-avatar">L</div>
+            <div>
+              <div class="story-name">이○○ (18세)</div>
+              <div class="story-role">AI 스타트업 창업 / 특허 보유</div>
+            </div>
+          </div>
+        </div>
+        <div class="story-card">
+          <div class="story-quote">"</div>
+          <div class="story-text">환경 문제에 관심이 많았는데 어떻게 기여해야 할지 몰랐어요. 마이폴에서 연구를 시작하고, 국제 환경 학술지에 논문이 실렸을 때 정말 세상이 달라 보였어요.</div>
+          <div class="story-author">
+            <div class="story-avatar">P</div>
+            <div>
+              <div class="story-name">박○○ (16세)</div>
+              <div class="story-role">국제 환경 연구 논문 게재</div>
+            </div>
+          </div>
+        </div>
+        <div class="story-card">
+          <div class="story-quote">"</div>
+          <div class="story-text">입시 공부로 잃어가던 호기심을 마이폴에서 되찾았어요. 멘토 선생님들이 진짜 연구자들이라 배우는 게 살아있는 지식이에요. 연세대 조기 입학은 그냥 따라온 결과였어요.</div>
+          <div class="story-author">
+            <div class="story-avatar">C</div>
+            <div>
+              <div class="story-name">최○○ (17세)</div>
+              <div class="story-role">연세대학교 조기 입학</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-inner">
+      <div class="youtube-embed-wrap reveal delay-1">
+        <iframe
+          src="https://www.youtube.com/embed/yw8GdfHdMjk"
+          title="마이폴학교 유튜브"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="yt-label reveal delay-2">
+        ▶ 마이폴학교 유튜브 채널 — 학생 인터뷰, 수업 현장, 연구 과정
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRUST ===== -->
+  <section id="trust" class="section">
+    <div class="section-inner">
+      <span class="section-tag">신뢰 기반</span>
+      <h2 class="section-title reveal">검증된 기관이 신뢰합니다.</h2>
+
+      <div class="trust-grid">
+        <div class="trust-card reveal delay-1">
+          <div class="trust-icon">🏛️</div>
+          <div class="trust-title">충청북도 지정</div>
+          <div class="trust-desc">대안교육기관 1호 공식 인증</div>
+        </div>
+        <div class="trust-card reveal delay-2">
+          <div class="trust-icon">🤝</div>
+          <div class="trust-title">재단 협력</div>
+          <div class="trust-desc">국내외 교육 재단과의 공식 파트너십</div>
+        </div>
+        <div class="trust-card reveal delay-3">
+          <div class="trust-icon">🌏</div>
+          <div class="trust-title">글로벌 네트워크</div>
+          <div class="trust-desc">해외 연구기관 MOU 체결</div>
+
+        </div>
+        <div class="trust-card reveal delay-4">
+          <div class="trust-icon">👨‍🔬</div>
+          <div class="trust-title">박사급 교수진</div>
+          <div class="trust-desc">현직 연구자·교수들이 직접 지도</div>
+        </div>
+        <div class="trust-secret reveal delay-5">
+          <div class="trust-secret-icon">🔒</div>
+          <div class="trust-secret-text">
+            <strong>국내외 학교 MOU 체결 등 추가 협력 내용은 기밀 사항으로,</strong> 입학설명회에서만 상세히 공개됩니다. 설명회 참석 시 전체 네트워크와 협력 기관 목록을 직접 확인하실 수 있습니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section id="faq" class="section">
+    <div class="section-inner">
+      <span class="section-tag">부모님 FAQ</span>
+      <h2 class="section-title reveal">자주 묻는 질문들</h2>
+
+      <div class="faq-list">
+        <div class="faq-item reveal delay-1">
+          <div class="faq-q">검정고시를 보면 일반 대학 지원이 불가능한가요?</div>
+          <div class="faq-a">
+            <div class="faq-a-inner">전혀 그렇지 않습니다. 검정고시는 고교 졸업과 동등한 학력으로 인정되며, 국내외 모든 대학 지원이 가능합니다. 실제로 마이폴 졸업생들은 연세대, KAIST, 해외 대학 등에 성공적으로 진학하였습니다. 오히려 연구 포트폴리오와 논문 실적이 입시에 강력한 강점으로 작용합니다.</div>
+          </div>
+        </div>
+        <div class="faq-item reveal delay-2">
+          <div class="faq-q">학교 적응을 못하는 아이도 괜찮을까요?</div>
+          <div class="faq-a">
+            <div class="faq-a-inner">오히려 마이폴학교가 가장 잘 맞는 유형입니다. 기존 교육 방식에 맞지 않는다는 것은 다른 방식으로 배울 때 훨씬 빛날 수 있다는 신호입니다. 마이폴은 소수 정예로 1:1 맞춤 지도를 하기 때문에 개인의 속도와 방식에 맞게 성장할 수 있습니다.</div>
+          </div>
+        </div>
+        <div class="faq-item reveal delay-3">
+          <div class="faq-q">공부만 하는 학교 아닌가요? 사회성은 어떻게 되나요?</div>
+          <div class="faq-a">
+            <div class="faq-a-inner">연구는 혼자 하는 것이 아닙니다. 팀 프로젝트, 해외 교류, 학술 발표, 창업 활동 등 다양한 협업과 소통 경험을 합니다. 오히려 실제 사회와 연결된 활동들을 통해 일반 학교보다 더 풍부한 사회적 경험을 쌓습니다.</div>
+          </div>
+        </div>
+        <div class="faq-item reveal delay-4">
+          <div class="faq-q">중학생도 입학이 가능한가요?</div>
+          <div class="faq-a">
+            <div class="faq-a-inner">네, 중학생부터 입학 가능합니다. 오히려 이른 시기에 시작할수록 더 많은 연구 기회와 성과를 얻을 수 있습니다. 현재 재학 중인 학생들 중 중학교 시절 입학하여 이미 논문과 특허를 보유한 사례들이 있습니다.</div>
+          </div>
+        </div>
+        <div class="faq-item reveal delay-5">
+          <div class="faq-q">학비와 기숙사 비용은 어떻게 되나요?</div>
+          <div class="faq-a">
+            <div class="faq-a-inner">학비 관련 상세 정보는 개별 상황에 따라 다르게 적용될 수 있어 입학설명회에서 정확하게 안내드리고 있습니다. 장학 제도 및 분할 납부 옵션도 운영 중이니 설명회 신청 후 담당자와 상담해 주세요.</div>
+          </div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q">지방에 살아도 입학이 가능한가요?</div>
+          <div class="faq-a">
+            <div class="faq-a-inner">기숙형 학교로 운영되기 때문에 전국 어디서든 입학 가능합니다. 기숙사 시설을 완비하고 있으며, 주말 귀가도 가능합니다. 학교 위치와 기숙사 환경에 대한 자세한 내용은 설명회에서 직접 확인하실 수 있습니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WAITLIST / URGENCY ===== -->
+  <section id="waitlist">
+    <div class="section-inner" style="position:relative;z-index:1">
+      <div class="waitlist-badge">정원 마감 임박</div>
+      <h2 class="section-title white reveal" style="font-size:clamp(1.6rem,5vw,2.6rem)">
+        이미 마이폴학교는<br>
+        정원 마감으로<br>
+        <span style="color:var(--gold)">대기 입학만 가능합니다.</span>
+      </h2>
+      <p style="color:rgba(255,255,255,0.65);font-size:0.9rem;margin-top:12px;margin-bottom:0" class="reveal delay-1">
+        설명회 참석 신청 순서대로 입학 우선권이 부여됩니다.
+      </p>
+
+      <div class="schedule-cards">
+        <div class="schedule-card reveal delay-1">
+          <div class="schedule-date">
+            <div class="schedule-month">MAY</div>
+            <div class="schedule-day">03</div>
+          </div>
+          <div class="schedule-info">
+            <div class="schedule-title">5월 입학설명회</div>
+            <div class="schedule-detail">오후 2시 · 온라인 ZOOM</div>
+          </div>
+          <div class="schedule-spots">잔여<br>4석</div>
+        </div>
+        <div class="schedule-card reveal delay-2">
+          <div class="schedule-date">
+            <div class="schedule-month">MAY</div>
+            <div class="schedule-day">17</div>
+          </div>
+          <div class="schedule-info">
+            <div class="schedule-title">5월 오프라인 설명회</div>
+            <div class="schedule-detail">오후 2시 · 마이폴학교 본관</div>
+          </div>
+          <div class="schedule-spots">잔여<br>7석</div>
+        </div>
+        <div class="schedule-card reveal delay-3">
+          <div class="schedule-date" style="background:rgba(255,255,255,0.1)">
+            <div class="schedule-month" style="color:rgba(255,255,255,0.5)">JUN</div>
+            <div class="schedule-day" style="color:rgba(255,255,255,0.6)">07</div>
+          </div>
+          <div class="schedule-info">
+            <div class="schedule-title" style="color:rgba(255,255,255,0.5)">6월 입학설명회</div>
+            <div class="schedule-detail">일정 추후 공개</div>
+          </div>
+          <div class="schedule-spots" style="color:rgba(255,255,255,0.4)">접수<br>예정</div>
+        </div>
+      </div>
+
+      <div class="waitlist-cta reveal delay-4">
+        <button class="btn-big" onclick="window.open('https://docs.google.com/forms/d/1M9j_PlZ2y4TAlEY8SRbnjgv0aroCeRGwh-gGqXmvBpc/viewform','_blank')">
+          무료 입학설명회 신청하기 →
+        </button>
+        <div class="waitlist-note">신청은 무료이며, 개인정보는 입학 상담 목적으로만 활용됩니다.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <img src="https://mypaul.org/wp-content/uploads/2023/04/logo-w.png" alt="마이폴학교" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span style=&quot;color:#fff;font-size:1.2rem;font-weight:900&quot;>마이폴학교</span>')" />
+    </div>
+    <div class="footer-info">
+      충청북도 대안교육기관 1호<br>
+      대표 | 문의: mypaul.org<br>
+      개인정보처리방침에 따라 수집된 정보는 입학 상담 목적으로만 사용됩니다.
+    </div>
+    <div class="footer-links">
+      <span class="footer-link" onclick="window.open('https://docs.google.com/forms/d/1M9j_PlZ2y4TAlEY8SRbnjgv0aroCeRGwh-gGqXmvBpc/viewform','_blank')">입학 신청</span>
+      <a href="https://mypaul.org" class="footer-link" target="_blank">공식 홈페이지</a>
+      <span class="footer-link">개인정보처리방침</span>
+      <span class="footer-link">이용약관</span>
+    </div>
+  </footer>
+
+  <!-- FLOATING CTA -->
+  <div class="float-cta" id="floatCta">
+    <div class="float-cta-text"><strong>5월 설명회 잔여 4석</strong> — 지금 바로 무료 신청하세요</div>
+    <button class="float-cta-btn" onclick="window.open('https://docs.google.com/forms/d/1M9j_PlZ2y4TAlEY8SRbnjgv0aroCeRGwh-gGqXmvBpc/viewform','_blank')">📋 무료 입학설명회 신청하기</button>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+    <div class="modal-sheet" id="modalSheet">
+      <div class="modal-handle"></div>
+      <button class="modal-close" onclick="closeModal()" aria-label="닫기">✕</button>
+
+      <div id="formContent">
+        <div class="modal-title">입학설명회 신청</div>
+        <div class="modal-sub">무료로 참석하고 마이폴학교를 직접 확인하세요.</div>
+
+        <form id="applyForm" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label class="form-label" for="parentName">학부모 성함 <span>*</span></label>
+            <input class="form-input" type="text" id="parentName" name="parentName" placeholder="홍길동" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="phone">연락처 <span>*</span></label>
+            <input class="form-input" type="tel" id="phone" name="phone" placeholder="010-0000-0000" required
+              inputmode="tel" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="childAge">자녀 나이 (학년) <span>*</span></label>
+            <select class="form-select" id="childAge" name="childAge" required>
+              <option value="" disabled selected>선택해주세요</option>
+              <option>초등 4학년</option>
+              <option>초등 5학년</option>
+              <option>초등 6학년</option>
+              <option>중학교 1학년</option>
+              <option>중학교 2학년</option>
+              <option>중학교 3학년</option>
+              <option>고등학교 1학년</option>
+              <option>고등학교 2학년</option>
+              <option>고등학교 3학년</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">희망 설명회 일정 <span>*</span></label>
+            <div class="form-radio-group">
+              <label class="form-radio-label">
+                <input type="radio" name="schedule" value="5월3일_온라인" required />
+                5월 3일 (토) 오후 2시 — 온라인 ZOOM
+              </label>
+              <label class="form-radio-label">
+                <input type="radio" name="schedule" value="5월17일_오프라인" />
+                5월 17일 (토) 오후 2시 — 오프라인 (학교 방문)
+              </label>
+              <label class="form-radio-label">
+                <input type="radio" name="schedule" value="6월_추후" />
+                6월 이후 — 추후 일정 안내 받기
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="channel">어떻게 알게 되셨나요?</label>
+            <select class="form-select" id="channel" name="channel">
+              <option value="" disabled selected>선택해주세요</option>
+              <option>인스타그램 광고</option>
+              <option>페이스북 광고</option>
+              <option>네이버 검색</option>
+              <option>지인 추천</option>
+              <option>유튜브</option>
+              <option>기타</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input type="checkbox" id="agree" name="agree" required />
+              <div class="form-check-text">
+                <a href="#">개인정보처리방침</a>에 동의합니다. 수집된 정보는 입학 상담 목적으로만 사용됩니다. <span style="color:var(--red)">(필수)</span>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="form-submit">무료 신청 완료하기</button>
+        </form>
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        <div class="success-icon">🎉</div>
+        <div class="success-title">신청이 완료되었습니다!</div>
+        <div class="success-desc">
+          담당자가 24시간 내로 연락드릴 예정입니다.<br>
+          설명회 전날 참석 링크 / 장소 안내를 문자로 보내드립니다.<br><br>
+          <strong>마이폴학교가 기대됩니다!</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    /* ===== INTERSECTION OBSERVER — SCROLL ANIMATIONS ===== */
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ===== COUNTER ANIMATION ===== */
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target, 10);
+      const duration = 1800;
+      const start = performance.now();
+      function update(time) {
+        const elapsed = time - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target);
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+    /* ===== FLOATING CTA SHOW AFTER SCROLL ===== */
+    const floatCta = document.getElementById('floatCta');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY || window.pageYOffset;
+      if (scrollY > 400) {
+        floatCta.classList.add('show');
+      } else {
+        floatCta.classList.remove('show');
+      }
+      lastScroll = scrollY;
+    }, { passive: true });
+
+    /* ===== FAQ ACCORDION ===== */
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    /* ===== MODAL ===== */
+    const overlay = document.getElementById('modalOverlay');
+
+    function openModal(source) {
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      // GA/FB event tracking placeholder
+      // gtag('event', 'open_modal', { source });
+      // fbq('track', 'Lead', { source });
+    }
+
+    function closeModal() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function handleOverlayClick(e) {
+      if (e.target === overlay) closeModal();
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('applyForm');
+      const data = Object.fromEntries(new FormData(form).entries());
+      console.log('Form data:', data);
+
+      // GA event
+      // gtag('event', 'form_submit', { event_category: 'lead', ...data });
+      // FB event
+      // fbq('track', 'CompleteRegistration', data);
+
+      document.getElementById('formContent').style.display = 'none';
+      document.getElementById('formSuccess').classList.add('show');
+
+      // Auto close after 3 seconds
+      setTimeout(() => {
+        closeModal();
+        setTimeout(() => {
+          document.getElementById('formContent').style.display = 'block';
+          document.getElementById('formSuccess').classList.remove('show');
+          form.reset();
+        }, 400);
+      }, 3500);
+    }
+
+    /* ===== Phone format helper ===== */
+    document.getElementById('phone').addEventListener('input', function(e) {
+      let val = this.value.replace(/\D/g, '');
+      if (val.length <= 3) {
+        this.value = val;
+      } else if (val.length <= 7) {
+        this.value = val.slice(0,3) + '-' + val.slice(3);
+      } else {
+        this.value = val.slice(0,3) + '-' + val.slice(3,7) + '-' + val.slice(7,11);
+      }
+    });
+  </script>
+</body>
+</html>
