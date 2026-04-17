@@ -44,13 +44,13 @@
 
     /* ===== DESIGN TOKENS ===== */
     :root {
-      --navy: #0B1437;
-      --navy-light: #1A2755;
-      --gold: #D4A843;
-      --gold-light: #F5C842;
-      --accent: #007a3d;
-      --green: #007a3d;
-      --green-light: #009E4F;
+      --navy: #1B6B2A;
+      --navy-light: #256235;
+      --gold: #33AA33;
+      --gold-light: #4DC44D;
+      --accent: #1B6B2A;
+      --green: #1B6B2A;
+      --green-light: #33AA33;
       --red: #E53E3E;
       --gray-100: #F7F8FA;
       --gray-200: #EAECF0;
@@ -190,8 +190,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 80% 60% at 50% 20%, rgba(0,122,61,0.22) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(212,168,67,0.12) 0%, transparent 60%);
+        radial-gradient(ellipse 80% 60% at 50% 20%, rgba(51,170,51,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(27,107,42,0.15) 0%, transparent 60%);
       pointer-events: none;
     }
     .hero-badge {
@@ -570,17 +570,23 @@
       gap: 16px;
       width: max-content;
     }
-    .news-card {
+    .news-card-link {
+      display: block;
       width: 260px;
       flex-shrink: 0;
+      text-decoration: none;
+      color: inherit;
+    }
+    .news-card {
+      width: 100%;
       background: var(--gray-100);
       border-radius: var(--radius);
       overflow: hidden;
-      transition: transform 0.25s;
+      transition: transform 0.25s, box-shadow 0.25s;
     }
-    .news-card:hover { transform: translateY(-4px); }
+    .news-card-link:hover .news-card { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(27,107,42,0.18); }
     .news-card-thumb {
-      height: 140px;
+      height: 160px;
       background: var(--navy);
       display: flex;
       align-items: center;
@@ -588,15 +594,22 @@
       position: relative;
       overflow: hidden;
     }
+    .news-card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
     .news-card-thumb-label {
       position: absolute;
       top: 12px; left: 12px;
       background: var(--gold);
-      color: var(--navy);
+      color: #fff;
       font-size: 0.7rem;
       font-weight: 700;
       padding: 3px 8px;
       border-radius: 4px;
+      z-index: 1;
     }
     .news-card-thumb-icon { font-size: 2.5rem; opacity: 0.4; }
     .news-card-body { padding: 16px; }
@@ -851,7 +864,7 @@
 
     /* ===== SECTION 11: URGENCY / WAITLIST ===== */
     #waitlist {
-      background: linear-gradient(135deg, var(--navy), #0D1B4D);
+      background: linear-gradient(135deg, var(--navy), #0F4A1A);
       padding: 72px 20px;
       text-align: center;
       position: relative;
@@ -864,7 +877,7 @@
       left: -20%;
       width: 140%;
       height: 200%;
-      background: radial-gradient(ellipse 60% 40% at 60% 60%, rgba(212,168,67,0.12) 0%, transparent 60%);
+      background: radial-gradient(ellipse 60% 40% at 60% 60%, rgba(51,170,51,0.15) 0%, transparent 60%);
       pointer-events: none;
     }
     .waitlist-badge {
@@ -1207,17 +1220,19 @@
     <div class="hero-badge">충청북도 대안교육기관 1호 인증</div>
 
     <h1 class="hero-title reveal">
-      입시 준비 대신 <span class="highlight">연구를 합니다.</span>
+      내가 원하는 관심사로<br><span class="highlight">10대에 대학원을 가는 미래학교</span>
     </h1>
     <p class="hero-sub reveal delay-1">
-      내가 원하는 관심사로 <strong>10대에 대학원을 가는 미래학교</strong>
+      입시 준비 대신 <strong>연구를 합니다.</strong>
     </p>
 
     <div class="hero-cta-group reveal delay-2">
       <button class="btn-primary" onclick="window.open('https://docs.google.com/forms/d/1M9j_PlZ2y4TAlEY8SRbnjgv0aroCeRGwh-gGqXmvBpc/viewform','_blank')">
         📋 무료 입학설명회 신청하기
       </button>
-      <button class="btn-secondary" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">
+    </div>
+    <div class="reveal delay-3" style="margin-top:12px">
+      <button class="btn-secondary" onclick="window.open('https://mypaul.org/noticebd/','_blank')">
         진학 성과 보러가기 →
       </button>
     </div>
@@ -1318,9 +1333,9 @@
 
       <div class="results-grid">
         <div class="result-card reveal delay-1">
-          <div class="result-title">매년 논문·특허<br>발표 등재</div>
+          <div class="result-title">대학원 진학율</div>
           <div class="result-num"><span class="counter" data-target="48">0</span>%</div>
-          <div class="result-label">연구 결과를 실제 성과로</div>
+          <div class="result-label">10대에 이미 대학원으로</div>
         </div>
         <div class="result-card reveal delay-2">
           <div class="result-title">글로벌 해외연구활동<br>및 발표 무대</div>
@@ -1328,9 +1343,9 @@
           <div class="result-label">세계 무대로 나아가는 학생들</div>
         </div>
         <div class="result-card reveal delay-3">
-          <div class="result-title">10대 연구자·특허자<br>창업가 배출</div>
-          <div class="result-num"><span class="counter" data-target="100">0</span>%</div>
-          <div class="result-label">원하는 분야 진로 달성률</div>
+          <div class="result-title">해외 유학</div>
+          <div class="result-num"><span class="counter" data-target="35">0</span>%</div>
+          <div class="result-label">글로벌 무대로 나아가는 학생들</div>
         </div>
       </div>
     </div>
@@ -1363,8 +1378,8 @@
         <div class="why-pillar reveal delay-3">
           <div class="pillar-icon">🎓</div>
           <div>
-            <div class="pillar-title">대학 과정 선행</div>
-            <div class="pillar-desc">검정고시와 학점 취득을 병행하며, 10대에 이미 대학원 수준의 연구를 경험합니다.</div>
+            <div class="pillar-title">10대 전문가 완성</div>
+            <div class="pillar-desc">독학사·학점 취득을 병행하며, 10대에 이미 대학원 수준의 연구를 경험합니다.</div>
           </div>
         </div>
       </div>
@@ -1413,10 +1428,10 @@
         <div class="step-item reveal delay-3">
           <div class="step-num">03</div>
           <div class="step-body">
-            <div class="step-title">검정고시 + 학점 취득</div>
-            <div class="step-desc">연구와 병행하여 검정고시를 준비하고 학점은행제를 통해 공식 학력을 갖춥니다.</div>
+            <div class="step-title">독학사 + 학점 취득</div>
+            <div class="step-desc">연구와 병행하여 독학사를 준비하고 학점은행제를 통해 공식 학력을 갖춥니다.</div>
             <div class="step-tags">
-              <span class="step-tag">검정고시</span>
+              <span class="step-tag">독학사</span>
               <span class="step-tag">학점은행제</span>
               <span class="step-tag">학력 취득</span>
             </div>
@@ -1447,56 +1462,82 @@
 
     <div class="news-scroll-wrap reveal">
       <div class="news-track">
-        <div class="news-card">
-          <div class="news-card-thumb" style="background:#1A2755">
-            <span class="news-card-thumb-label">언론 기사</span>
-            <span class="news-card-thumb-icon">📰</span>
+
+        <!-- 기사 1: 조선에듀 2025.11.14 -->
+        <a class="news-card-link" href="https://edu.chosun.com/site/data/html_dir/2025/11/14/2025111480129.html" target="_blank" rel="noopener">
+          <div class="news-card">
+            <div class="news-card-thumb" style="background:#1B3A22">
+              <span class="news-card-thumb-label">조선에듀</span>
+              <img src="https://edu.chosun.com/site/data/img_dir/2025/11/14/2025111480129_0.jpg" alt="마이폴학교 기사" onerror="this.style.display='none'" />
+              <span class="news-card-thumb-icon" style="position:absolute">📰</span>
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-title">마이폴학교, 10대 연구자 양성하는 대안교육의 새 모델</div>
+              <div class="news-card-meta">조선에듀 · 2025.11.14</div>
+            </div>
           </div>
-          <div class="news-card-body">
-            <div class="news-card-title">"10대 연구자 양성하는 대안학교, 마이폴학교의 실험"</div>
-            <div class="news-card-meta">조선에듀 · 2024</div>
+        </a>
+
+        <!-- 기사 2: 위클리피플 2025.10.15 -->
+        <a class="news-card-link" href="https://www.weeklypeople.net/view.do?seq=22542" target="_blank" rel="noopener">
+          <div class="news-card">
+            <div class="news-card-thumb" style="background:#1B4422">
+              <span class="news-card-thumb-label">위클리피플</span>
+              <img src="http://www.weeklypeople.net/upload_new/20251015/mypaul.png" alt="마이폴학교" onerror="this.style.display='none'" />
+              <span class="news-card-thumb-icon" style="position:absolute">📰</span>
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-title">독서의 즐거운 세계 — 마이폴학교 교육철학 특강</div>
+              <div class="news-card-meta">위클리피플 · 2025.10.15</div>
+            </div>
           </div>
-        </div>
-        <div class="news-card">
-          <div class="news-card-thumb" style="background:#1A3A2A">
-            <span class="news-card-thumb-label">도서 발간</span>
-            <span class="news-card-thumb-icon">📖</span>
+        </a>
+
+        <!-- 기사 3: 조선에듀 2025.08.27 -->
+        <a class="news-card-link" href="https://edu.chosun.com/site/data/html_dir/2025/08/27/2025082780119.html" target="_blank" rel="noopener">
+          <div class="news-card">
+            <div class="news-card-thumb" style="background:#1B3A22">
+              <span class="news-card-thumb-label">조선에듀</span>
+              <img src="https://edu.chosun.com/site/data/img_dir/2025/08/27/2025082780119_0.jpg" alt="마이폴학교 기사" onerror="this.style.display='none'" />
+              <span class="news-card-thumb-icon" style="position:absolute">📰</span>
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-title">입시 없이 대학원 가는 학교 — 마이폴학교의 PBL 교육</div>
+              <div class="news-card-meta">조선에듀 · 2025.08.27</div>
+            </div>
           </div>
-          <div class="news-card-body">
-            <div class="news-card-title">마이폴 교육 철학을 담은 단행본 출간</div>
-            <div class="news-card-meta">마이폴 출판 · 2023</div>
+        </a>
+
+        <!-- 기사 4: 여성동아 -->
+        <a class="news-card-link" href="https://woman.donga.com/edu/article/all/12/5768350/1" target="_blank" rel="noopener">
+          <div class="news-card">
+            <div class="news-card-thumb" style="background:#2A4A1A">
+              <span class="news-card-thumb-label">여성동아</span>
+              <img src="https://woman.donga.com/ogimage/2024/05/5768350.jpg" alt="여성동아 마이폴" onerror="this.style.display='none'" />
+              <span class="news-card-thumb-icon" style="position:absolute">📰</span>
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-title">10대 연구자를 키우는 학교, 마이폴의 특별한 교육법</div>
+              <div class="news-card-meta">여성동아 · 2024</div>
+            </div>
           </div>
-        </div>
-        <div class="news-card">
-          <div class="news-card-thumb" style="background:#2A1A3A">
-            <span class="news-card-thumb-label">해외 활동</span>
-            <span class="news-card-thumb-icon">✈️</span>
+        </a>
+
+        <!-- 기사 5: 글로벌에픽 2025.04.09 -->
+        <a class="news-card-link" href="https://www.globalepic.co.kr/view.php?ud=2025040914282050296cf2d78c68_29" target="_blank" rel="noopener">
+          <div class="news-card">
+            <div class="news-card-thumb" style="background:#1A3A2A">
+              <span class="news-card-thumb-label">글로벌에픽</span>
+              <img src="https://cgeimage.commutil.kr/phpwas/restmb_allidxmake.php?pp=002&idx=3&simg=20250409142854018296cf2d78c681439208141.jpg&nmt=29" alt="몽골 MOU" onerror="this.style.display='none'" />
+              <span class="news-card-thumb-icon" style="position:absolute">🌏</span>
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-title">2HM 컨소시엄, 몽골 교육부와 MOU 체결</div>
+              <div class="news-card-meta">글로벌에픽 · 2025.04.09</div>
+            </div>
           </div>
-          <div class="news-card-body">
-            <div class="news-card-title">일본 · 미국 연구 협력 기관 방문 및 발표</div>
-            <div class="news-card-meta">마이폴 해외활동 · 2024</div>
-          </div>
-        </div>
-        <div class="news-card">
-          <div class="news-card-thumb" style="background:#3A2A1A">
-            <span class="news-card-thumb-label">수상</span>
-            <span class="news-card-thumb-icon">🏆</span>
-          </div>
-          <div class="news-card-body">
-            <div class="news-card-title">국제 청소년 과학 경진대회 최우수상 수상</div>
-            <div class="news-card-meta">글로벌 사이언스 · 2024</div>
-          </div>
-        </div>
-        <div class="news-card">
-          <div class="news-card-thumb" style="background:#1A2A3A">
-            <span class="news-card-thumb-label">방송</span>
-            <span class="news-card-thumb-icon">🎬</span>
-          </div>
-          <div class="news-card-body">
-            <div class="news-card-title">EBS 다큐멘터리 "미래학교" 편 촬영 참여</div>
-            <div class="news-card-meta">EBS · 2023</div>
-          </div>
-        </div>
+        </a>
+
       </div>
     </div>
     <div class="section-inner">
@@ -1674,9 +1715,9 @@
 
       <div class="faq-list">
         <div class="faq-item reveal delay-1">
-          <div class="faq-q">검정고시를 보면 일반 대학 지원이 불가능한가요?</div>
+          <div class="faq-q">독학사를 통해 일반 대학 지원이 가능한가요?</div>
           <div class="faq-a">
-            <div class="faq-a-inner">전혀 그렇지 않습니다. 검정고시는 고교 졸업과 동등한 학력으로 인정되며, 국내외 모든 대학 지원이 가능합니다. 실제로 마이폴 졸업생들은 연세대, KAIST, 해외 대학 등에 성공적으로 진학하였습니다. 오히려 연구 포트폴리오와 논문 실적이 입시에 강력한 강점으로 작용합니다.</div>
+            <div class="faq-a-inner">네, 가능합니다. 독학사는 고교 졸업과 동등한 학력으로 인정되며, 국내외 모든 대학 지원이 가능합니다. 실제로 마이폴 졸업생들은 연세대, KAIST, 해외 대학 등에 성공적으로 진학하였습니다. 오히려 연구 포트폴리오와 논문 실적이 입시에 강력한 강점으로 작용합니다.</div>
           </div>
         </div>
         <div class="faq-item reveal delay-2">
