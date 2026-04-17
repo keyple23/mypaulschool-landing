@@ -930,16 +930,23 @@
     .schedule-detail { font-size: 0.78rem; color: rgba(255,255,255,0.55); }
     .schedule-spots {
       margin-left: auto;
-      font-size: 0.72rem;
+      font-size: 0.8rem;
       font-weight: 900;
-      color: var(--gold);
+      color: #FF4444;
       text-align: center;
       flex-shrink: 0;
-      animation: spotsFlash 1.2s ease-in-out infinite;
+      line-height: 1.2;
+      background: rgba(255,68,68,0.12);
+      border: 1px solid rgba(255,68,68,0.35);
+      border-radius: 8px;
+      padding: 6px 10px;
+      animation: spotsUrgent 0.9s ease-in-out infinite;
     }
-    @keyframes spotsFlash {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.55; transform: scale(1.08); }
+    @keyframes spotsUrgent {
+      0%   { transform: scale(1);    color: #FF4444; box-shadow: 0 0 0 0 rgba(255,68,68,0.5); }
+      30%  { transform: scale(1.12) rotate(-2deg); color: #FF6600; box-shadow: 0 0 10px 4px rgba(255,68,68,0.35); }
+      60%  { transform: scale(1.12) rotate(2deg);  color: #FF4444; box-shadow: 0 0 10px 4px rgba(255,68,68,0.35); }
+      100% { transform: scale(1);    color: #FF4444; box-shadow: 0 0 0 0 rgba(255,68,68,0); }
     }
     .waitlist-cta {
       margin-top: 32px;
@@ -1775,24 +1782,13 @@
         <div class="schedule-card reveal delay-1">
           <div class="schedule-date">
             <div class="schedule-month">MAY</div>
-            <div class="schedule-day">03</div>
-          </div>
-          <div class="schedule-info">
-            <div class="schedule-title">5월 입학설명회</div>
-            <div class="schedule-detail">오후 2시 · 온라인 ZOOM</div>
-          </div>
-          <div class="schedule-spots">잔여<br>4석</div>
-        </div>
-        <div class="schedule-card reveal delay-2">
-          <div class="schedule-date">
-            <div class="schedule-month">MAY</div>
             <div class="schedule-day">17</div>
           </div>
           <div class="schedule-info">
             <div class="schedule-title">5월 오프라인 설명회</div>
             <div class="schedule-detail">오후 2시 · 마이폴학교 본관</div>
           </div>
-          <div class="schedule-spots">잔여<br>7석</div>
+          <div class="schedule-spots">🔥 잔여<br>7석</div>
         </div>
       </div>
 
@@ -1825,7 +1821,7 @@
 
   <!-- FLOATING CTA -->
   <div class="float-cta" id="floatCta">
-    <div class="float-cta-text"><strong>5월 설명회 잔여 4석</strong> — 지금 바로 무료 신청하세요</div>
+    <div class="float-cta-text"><strong>5월 오프라인 설명회 잔여 7석</strong> — 지금 바로 무료 신청하세요</div>
     <button class="float-cta-btn" onclick="window.open('https://docs.google.com/forms/d/1M9j_PlZ2y4TAlEY8SRbnjgv0aroCeRGwh-gGqXmvBpc/viewform','_blank')">📋 무료 입학설명회 신청하기</button>
   </div>
 
