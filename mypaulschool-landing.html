@@ -1962,6 +1962,11 @@
       setTimeout(function() {
         document.getElementById('floatForm').style.display = 'none';
         document.getElementById('floatSuccess').style.display = 'block';
+        document.querySelectorAll('.schedule-spots').forEach(el => {
+          el.innerHTML = '🔥 잔여<br>6석';
+        });
+        const label = document.querySelector('.float-cta-label strong');
+        if (label) label.textContent = '🔥 5월 오프라인 설명회 잔여 6석';
       }, 800);
     }
 
