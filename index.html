@@ -208,7 +208,7 @@
     .hero-badge::before {
       content: '';
       width: 8px; height: 8px;
-      background: #4ADE80;
+      background: var(--gold);
       border-radius: 50%;
       animation: blink 1.5s infinite;
     }
@@ -332,7 +332,7 @@
     }
     .admission-dot {
       width: 8px; height: 8px;
-      background: #4ADE80;
+      background: var(--gold);
       border-radius: 50%;
       flex-shrink: 0;
     }
@@ -350,7 +350,7 @@
     }
     .badge-univ { background: rgba(59,130,246,0.2); color: #93C5FD; }
     .badge-grad { background: rgba(212,168,67,0.2); color: var(--gold); }
-    .badge-paper { background: rgba(74,222,128,0.15); color: #4ADE80; }
+    .badge-paper { background: rgba(212,168,67,0.2); color: var(--gold); }
 
     /* ===== SECTION 2: PAIN POINTS ===== */
     #pain {
@@ -882,19 +882,20 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(229,62,62,0.15);
-      border: 1px solid rgba(229,62,62,0.3);
-      color: #FCA5A5;
+      background: var(--gold);
+      border: none;
+      color: var(--navy);
       font-size: 0.8rem;
-      font-weight: 700;
-      padding: 6px 14px;
+      font-weight: 900;
+      padding: 7px 16px;
       border-radius: 30px;
       margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(212,168,67,0.4);
     }
     .waitlist-badge::before {
       content: '';
       width: 8px; height: 8px;
-      background: var(--red);
+      background: var(--navy);
       border-radius: 50%;
       animation: blink 1.5s infinite;
     }
@@ -930,10 +931,15 @@
     .schedule-spots {
       margin-left: auto;
       font-size: 0.72rem;
-      font-weight: 700;
-      color: #FCA5A5;
+      font-weight: 900;
+      color: var(--gold);
       text-align: center;
       flex-shrink: 0;
+      animation: spotsFlash 1.2s ease-in-out infinite;
+    }
+    @keyframes spotsFlash {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.55; transform: scale(1.08); }
     }
     .waitlist-cta {
       margin-top: 32px;
@@ -1013,7 +1019,7 @@
       color: rgba(255,255,255,0.6);
       text-align: center;
     }
-    .float-cta-text strong { color: #FCA5A5; }
+    .float-cta-text strong { color: var(--gold); }
     .float-cta-btn {
       width: 100%;
       max-width: 360px;
@@ -1479,7 +1485,7 @@
         <!-- 기사 2: 글로벌에픽 2025.04.09 -->
         <a class="news-card-link" href="https://www.globalepic.co.kr/view.php?ud=2025040914282050296cf2d78c68_29" target="_blank" rel="noopener">
           <div class="news-card">
-            <div class="news-card-thumb" style="background:#1A3A2A">
+            <div class="news-card-thumb" style="background:#1A2755">
               <span class="news-card-thumb-label">글로벌에픽</span>
               <img src="https://cgeimage.commutil.kr/phpwas/restmb_allidxmake.php?pp=002&idx=3&simg=20250409142854018296cf2d78c681439208141.jpg&nmt=29" alt="몽골 MOU" onerror="this.style.display='none'" />
               <span class="news-card-thumb-icon" style="position:absolute">🌏</span>
@@ -1787,17 +1793,6 @@
             <div class="schedule-detail">오후 2시 · 마이폴학교 본관</div>
           </div>
           <div class="schedule-spots">잔여<br>7석</div>
-        </div>
-        <div class="schedule-card reveal delay-3">
-          <div class="schedule-date" style="background:rgba(255,255,255,0.1)">
-            <div class="schedule-month" style="color:rgba(255,255,255,0.5)">JUN</div>
-            <div class="schedule-day" style="color:rgba(255,255,255,0.6)">07</div>
-          </div>
-          <div class="schedule-info">
-            <div class="schedule-title" style="color:rgba(255,255,255,0.5)">6월 입학설명회</div>
-            <div class="schedule-detail">일정 추후 공개</div>
-          </div>
-          <div class="schedule-spots" style="color:rgba(255,255,255,0.4)">접수<br>예정</div>
         </div>
       </div>
 
