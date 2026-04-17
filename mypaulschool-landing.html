@@ -1852,12 +1852,17 @@
   </footer>
 
   <!-- FLOATING CTA -->
+  <iframe name="hiddenFrame" style="display:none"></iframe>
   <div class="float-cta" id="floatCta">
     <div class="float-cta-label"><strong>🔥 5월 오프라인 설명회 잔여 7석</strong> — 이름과 연락처만 남겨주세요</div>
-    <form class="float-form" id="floatForm" onsubmit="submitFloatForm(event)">
-      <input class="float-input" type="text" id="floatName" placeholder="이름" required autocomplete="name" />
-      <input class="float-input" type="tel" id="floatPhone" placeholder="연락처" required autocomplete="tel" inputmode="tel" />
-      <button class="float-submit" type="submit" id="floatSubmitBtn">신청</button>
+    <form class="float-form" id="floatForm"
+      action="https://script.google.com/macros/s/AKfycbzDh_BHld6x0QxR6N6HRgWcwZgxKHCq6BHcR-QuYlkS9XpoBbiXC_Qv39fscgVx0oUh/exec"
+      method="GET"
+      target="hiddenFrame"
+      onsubmit="handleFloatSubmit()">
+      <input class="float-input" type="text" name="name" placeholder="이름" required autocomplete="name" />
+      <input class="float-input" type="tel" name="phone" placeholder="연락처" required autocomplete="tel" inputmode="tel" />
+      <button class="float-submit" type="submit">신청</button>
     </form>
     <div class="float-success" id="floatSuccess">✅ 신청 완료! 곧 연락드리겠습니다.</div>
   </div>
@@ -1953,26 +1958,11 @@
 
   <script>
     /* ===== APPS SCRIPT DB 연동 ===== */
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzDh_BHld6x0QxR6N6HRgWcwZgxKHCq6BHcR-QuYlkS9XpoBbiXC_Qv39fscgVx0oUh/exec';
-
-    function submitFloatForm(e) {
-      e.preventDefault();
-      const btn = document.getElementById('floatSubmitBtn');
-      const name = document.getElementById('floatName').value.trim();
-      const phone = document.getElementById('floatPhone').value.trim();
-      if (!name || !phone) return;
-
-      btn.disabled = true;
-      btn.textContent = '전송중...';
-
-      const url = `${APPS_SCRIPT_URL}?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}`;
-
-      const img = new Image();
-      img.onload = img.onerror = function() {
+    function handleFloatSubmit() {
+      setTimeout(function() {
         document.getElementById('floatForm').style.display = 'none';
         document.getElementById('floatSuccess').style.display = 'block';
-      };
-      img.src = url;
+      }, 800);
     }
 
     /* ===== INTERSECTION OBSERVER — SCROLL ANIMATIONS ===== */
