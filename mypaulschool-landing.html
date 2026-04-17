@@ -1011,38 +1011,67 @@
       background: rgba(11,20,55,0.97);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      padding: 14px 20px 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
+      padding: 12px 16px 20px;
       box-shadow: 0 -8px 32px rgba(0,0,0,0.3);
       transform: translateY(100%);
       transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .float-cta.show { transform: translateY(0); }
-    .float-cta-text {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.6);
+    .float-cta-label {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.5);
       text-align: center;
+      margin-bottom: 8px;
     }
-    .float-cta-text strong { color: var(--gold); }
-    .float-cta-btn {
-      width: 100%;
-      max-width: 360px;
+    .float-cta-label strong { color: var(--gold); }
+    .float-form {
+      display: flex;
+      gap: 8px;
+      align-items: stretch;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .float-input {
+      flex: 1;
+      min-width: 0;
+      background: rgba(255,255,255,0.1);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      color: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    .float-input::placeholder { color: rgba(255,255,255,0.35); }
+    .float-input:focus { border-color: var(--gold); }
+    .float-submit {
+      flex-shrink: 0;
       background: linear-gradient(135deg, var(--gold), var(--gold-light));
       color: var(--navy);
+      font-family: inherit;
       font-weight: 900;
-      font-size: 1rem;
-      padding: 16px 24px;
-      border-radius: 50px;
+      font-size: 0.88rem;
+      padding: 12px 18px;
+      border-radius: 12px;
       border: none;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(212,168,67,0.4);
-      letter-spacing: -0.3px;
-      transition: transform 0.2s;
+      white-space: nowrap;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 14px rgba(212,168,67,0.4);
     }
-    .float-cta-btn:hover { transform: translateY(-1px); }
+    .float-submit:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(212,168,67,0.5); }
+    .float-submit:disabled { opacity: 0.6; cursor: default; }
+    .float-success {
+      text-align: center;
+      color: var(--gold);
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 8px 0;
+      display: none;
+    }
 
     /* ===== MODAL ===== */
     .modal-overlay {
@@ -1824,8 +1853,13 @@
 
   <!-- FLOATING CTA -->
   <div class="float-cta" id="floatCta">
-    <div class="float-cta-text"><strong>5월 오프라인 설명회 잔여 7석</strong> — 지금 바로 무료 신청하세요</div>
-    <button class="float-cta-btn" onclick="window.open('https://docs.google.com/forms/d/1M9j_PlZ2y4TAlEY8SRbnjgv0aroCeRGwh-gGqXmvBpc/viewform','_blank')">📋 무료 입학설명회 신청하기</button>
+    <div class="float-cta-label"><strong>🔥 5월 오프라인 설명회 잔여 7석</strong> — 이름과 연락처만 남겨주세요</div>
+    <form class="float-form" id="floatForm" onsubmit="submitFloatForm(event)">
+      <input class="float-input" type="text" id="floatName" placeholder="이름" required autocomplete="name" />
+      <input class="float-input" type="tel" id="floatPhone" placeholder="연락처" required autocomplete="tel" inputmode="tel" />
+      <button class="float-submit" type="submit" id="floatSubmitBtn">신청</button>
+    </form>
+    <div class="float-success" id="floatSuccess">✅ 신청 완료! 곧 연락드리겠습니다.</div>
   </div>
 
   <!-- MODAL -->
@@ -1918,6 +1952,35 @@
 
 
   <script>
+    /* ===== APPS SCRIPT DB 연동 ===== */
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx12QFL73JKWbcE__EMt2oaRevY1sfEp8eAFTG2NVlnOE7uuUHsgAgLnnecCHWrUXuk/exec';
+
+    async function submitFloatForm(e) {
+      e.preventDefault();
+      const btn = document.getElementById('floatSubmitBtn');
+      const name = document.getElementById('floatName').value.trim();
+      const phone = document.getElementById('floatPhone').value.trim();
+      if (!name || !phone) return;
+
+      btn.disabled = true;
+      btn.textContent = '전송중...';
+
+      try {
+        await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({ name, phone })
+        });
+        document.getElementById('floatForm').style.display = 'none';
+        document.getElementById('floatSuccess').style.display = 'block';
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = '신청';
+        alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+      }
+    }
+
     /* ===== INTERSECTION OBSERVER — SCROLL ANIMATIONS ===== */
     const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
     const observer = new IntersectionObserver((entries) => {
