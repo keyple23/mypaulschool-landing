@@ -1953,7 +1953,7 @@
 
   <script>
     /* ===== APPS SCRIPT DB 연동 ===== */
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx12QFL73JKWbcE__EMt2oaRevY1sfEp8eAFTG2NVlnOE7uuUHsgAgLnnecCHWrUXuk/exec';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzDh_BHld6x0QxR6N6HRgWcwZgxKHCq6BHcR-QuYlkS9XpoBbiXC_Qv39fscgVx0oUh/exec';
 
     async function submitFloatForm(e) {
       e.preventDefault();
@@ -1965,13 +1965,10 @@
       btn.disabled = true;
       btn.textContent = '전송중...';
 
+      const url = `${APPS_SCRIPT_URL}?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}`;
+
       try {
-        await fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify({ name, phone })
-        });
+        await fetch(url, { method: 'GET', mode: 'no-cors' });
         document.getElementById('floatForm').style.display = 'none';
         document.getElementById('floatSuccess').style.display = 'block';
       } catch (err) {
