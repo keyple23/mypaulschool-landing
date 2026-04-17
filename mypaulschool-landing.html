@@ -1955,7 +1955,7 @@
     /* ===== APPS SCRIPT DB 연동 ===== */
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzDh_BHld6x0QxR6N6HRgWcwZgxKHCq6BHcR-QuYlkS9XpoBbiXC_Qv39fscgVx0oUh/exec';
 
-    async function submitFloatForm(e) {
+    function submitFloatForm(e) {
       e.preventDefault();
       const btn = document.getElementById('floatSubmitBtn');
       const name = document.getElementById('floatName').value.trim();
@@ -1967,15 +1967,12 @@
 
       const url = `${APPS_SCRIPT_URL}?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}`;
 
-      try {
-        await fetch(url, { method: 'GET', mode: 'no-cors' });
+      const img = new Image();
+      img.onload = img.onerror = function() {
         document.getElementById('floatForm').style.display = 'none';
         document.getElementById('floatSuccess').style.display = 'block';
-      } catch (err) {
-        btn.disabled = false;
-        btn.textContent = '신청';
-        alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-      }
+      };
+      img.src = url;
     }
 
     /* ===== INTERSECTION OBSERVER — SCROLL ANIMATIONS ===== */
