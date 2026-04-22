@@ -1967,11 +1967,20 @@
       btn.disabled = true;
       btn.textContent = '전송중...';
 
+      const body = [
+        'entry.794974991=' + encodeURIComponent(name),
+        'entry.71665702='  + encodeURIComponent(phone),
+        'entry.1893157564=%2D',
+        'entry.1219243499=%2D',
+        'entry.1692866288=%2D',
+        'entry.1353017556=%EB%8F%99%EC%9D%98%ED%95%A8'
+      ].join('&');
+
       fetch(FORM_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'entry.794974991=' + encodeURIComponent(name) + '&entry.71665702=' + encodeURIComponent(phone)
+        body: body
       }).finally(function() {
         document.getElementById('floatForm').style.display = 'none';
         document.getElementById('floatSuccess').style.display = 'block';
