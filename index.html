@@ -1954,8 +1954,8 @@
 
 
   <script>
-    /* ===== APPS SCRIPT DB 연동 ===== */
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx12QFL73JKWbcE__EMt2oaRevY1sfEp8eAFTG2NVlnOE7uuUHsgAgLnnecCHWrUXuk/exec';
+    /* ===== 구글폼 백그라운드 제출 ===== */
+    const FORM_URL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdFQ_dtlUXaNsv5ueBoUnZiDh0kYSyuLx6RdJzXVVBT5bQNng/formResponse';
 
     function handleFloatSubmit(e) {
       e.preventDefault();
@@ -1967,11 +1967,11 @@
       btn.disabled = true;
       btn.textContent = '전송중...';
 
-      fetch(APPS_SCRIPT_URL, {
+      fetch(FORM_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'name=' + encodeURIComponent(name) + '&phone=' + encodeURIComponent(phone)
+        body: 'entry.794974991=' + encodeURIComponent(name) + '&entry.71665702=' + encodeURIComponent(phone)
       }).finally(function() {
         document.getElementById('floatForm').style.display = 'none';
         document.getElementById('floatSuccess').style.display = 'block';
