@@ -1853,17 +1853,12 @@
   </footer>
 
   <!-- FLOATING CTA -->
-  <iframe name="hiddenFrame" style="display:none"></iframe>
   <div class="float-cta" id="floatCta">
     <div class="float-cta-label"><strong>🔥 5월 오프라인 설명회 잔여 7석</strong> — 이름과 연락처만 남겨주세요</div>
-    <form class="float-form" id="floatForm"
-      action="https://script.google.com/macros/s/AKfycbzDh_BHld6x0QxR6N6HRgWcwZgxKHCq6BHcR-QuYlkS9XpoBbiXC_Qv39fscgVx0oUh/exec"
-      method="GET"
-      target="hiddenFrame"
-      onsubmit="handleFloatSubmit()">
-      <input class="float-input" type="text" name="name" placeholder="이름" required autocomplete="name" />
-      <input class="float-input" type="tel" name="phone" placeholder="연락처" required autocomplete="tel" inputmode="tel" />
-      <button class="float-submit" type="submit">신청</button>
+    <form class="float-form" id="floatForm" onsubmit="handleFloatSubmit(event)">
+      <input class="float-input" type="text" id="floatName" placeholder="이름" required autocomplete="name" />
+      <input class="float-input" type="tel" id="floatPhone" placeholder="연락처" required autocomplete="tel" inputmode="tel" />
+      <button class="float-submit" type="submit" id="floatBtn">신청</button>
     </form>
     <div class="float-success" id="floatSuccess">✅ 신청 완료! 곧 연락드리겠습니다.</div>
     <div style="text-align:center;font-size:0.68rem;color:rgba(255,255,255,0.35);margin-top:6px">신청은 무료이며, 개인정보는 입학 상담 목적으로만 활용됩니다.</div>
@@ -1960,16 +1955,32 @@
 
   <script>
     /* ===== APPS SCRIPT DB 연동 ===== */
-    function handleFloatSubmit() {
-      setTimeout(function() {
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzDh_BHld6x0QxR6N6HRgWcwZgxKHCq6BHcR-QuYlkS9XpoBbiXC_Qv39fscgVx0oUh/exec';
+
+    function handleFloatSubmit(e) {
+      e.preventDefault();
+      const name  = document.getElementById('floatName').value.trim();
+      const phone = document.getElementById('floatPhone').value.trim();
+      if (!name || !phone) return;
+
+      const btn = document.getElementById('floatBtn');
+      btn.disabled = true;
+      btn.textContent = '전송중...';
+
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'name=' + encodeURIComponent(name) + '&phone=' + encodeURIComponent(phone)
+      }).finally(function() {
         document.getElementById('floatForm').style.display = 'none';
         document.getElementById('floatSuccess').style.display = 'block';
-        document.querySelectorAll('.schedule-spots').forEach(el => {
+        document.querySelectorAll('.schedule-spots').forEach(function(el) {
           el.innerHTML = '🔥 잔여<br>6석';
         });
         const label = document.querySelector('.float-cta-label strong');
         if (label) label.textContent = '🔥 5월 오프라인 설명회 잔여 6석';
-      }, 800);
+      });
     }
 
     /* ===== INTERSECTION OBSERVER — SCROLL ANIMATIONS ===== */
