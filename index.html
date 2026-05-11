@@ -5,14 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>마이폴학교 — 입시 준비 대신 연구를 합니다</title>
 
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-M2SC6DFQ');
+  </script>
+  <!-- End Google Tag Manager -->
+
   <!-- Google Analytics (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZW3VWEV11E"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
+    // NOTE: 현재 direct GA4 gtag 호출을 유지하고 있습니다.
+    //       추후 GTM 내 GA4 태그로 완전히 이관 시, 중복 page_view/event 중복 발사를 방지하기 위해
+    //       이 직접 호출을 비활성화하거나 remove 하세요.
     gtag('config', 'G-ZW3VWEV11E');
   </script>
+  <script src="./utm-tracker.js" defer></script>
 
   <!-- Meta Pixel Code -->
   <script>
@@ -1256,6 +1270,11 @@
 </head>
 <body>
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M2SC6DFQ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <!-- HEADER -->
   <header class="site-header">
     <div class="header-logo">
@@ -1858,6 +1877,11 @@
     <form class="float-form" id="floatForm" onsubmit="handleFloatSubmit(event)">
       <input class="float-input" type="text" id="floatName" placeholder="이름" required autocomplete="name" />
       <input class="float-input" type="tel" id="floatPhone" placeholder="연락처" required autocomplete="tel" inputmode="tel" />
+      <input type="hidden" name="utm_source" />
+      <input type="hidden" name="utm_medium" />
+      <input type="hidden" name="utm_campaign" />
+      <input type="hidden" name="utm_content" />
+      <input type="hidden" name="utm_term" />
       <button class="float-submit" type="submit" id="floatBtn">신청</button>
     </form>
     <div class="float-success" id="floatSuccess">✅ 신청 완료! 곧 연락드리겠습니다.</div>
@@ -1928,6 +1952,11 @@
               <option>기타</option>
             </select>
           </div>
+          <input type="hidden" name="utm_source" />
+          <input type="hidden" name="utm_medium" />
+          <input type="hidden" name="utm_campaign" />
+          <input type="hidden" name="utm_content" />
+          <input type="hidden" name="utm_term" />
           <div class="form-group">
             <div class="form-check">
               <input type="checkbox" id="agree" name="agree" required />
@@ -1967,14 +1996,28 @@
       btn.disabled = true;
       btn.textContent = '전송중...';
 
+      const utm = window.mypaulUtmTracker?.getStoredUtm() || {};
       const body = [
         'entry.794974991=' + encodeURIComponent(name),
         'entry.71665702='  + encodeURIComponent(phone),
         'entry.1893157564=%2D',
         'entry.1219243499=%2D',
         'entry.1692866288=%2D',
-        'entry.1353017556=%EB%8F%99%EC%9D%98%ED%95%A8'
+        'entry.1353017556=%EB%8F%99%EC%9D%98%ED%95%A8',
+        'entry.utm_source='  + encodeURIComponent(utm.utm_source || ''),
+        'entry.utm_medium='  + encodeURIComponent(utm.utm_medium || ''),
+        'entry.utm_campaign=' + encodeURIComponent(utm.utm_campaign || ''),
+        'entry.utm_content=' + encodeURIComponent(utm.utm_content || ''),
+        'entry.utm_term='    + encodeURIComponent(utm.utm_term || '')
       ].join('&');
+
+      window.mypaulUtmTracker?.pushFormSubmitDataLayer('float_cta', 'floating_cta');
+      window.mypaulUtmTracker?.pushGenerateLeadDataLayer('float_cta', 'floating_cta');
+      window.mypaulUtmTracker?.sendGa4LeadEvent('generate_lead', {
+        event_category: 'lead',
+        form_type: 'float_cta',
+        form_name: 'floating_cta',
+      });
 
       fetch(FORM_URL, {
         method: 'POST',
@@ -2074,10 +2117,18 @@
       e.preventDefault();
       const form = document.getElementById('applyForm');
       const data = Object.fromEntries(new FormData(form).entries());
-      console.log('Form data:', data);
+      const formName = data.parentName || '마이폴 신청폼';
 
-      // GA event
-      // gtag('event', 'form_submit', { event_category: 'lead', ...data });
+      window.mypaulUtmTracker?.pushFormSubmitDataLayer('apply_modal', formName);
+      window.mypaulUtmTracker?.pushGenerateLeadDataLayer('apply_modal', formName);
+      window.mypaulUtmTracker?.sendGa4LeadEvent('generate_lead', {
+        event_category: 'lead',
+        form_type: 'apply_modal',
+        form_name: formName,
+      });
+
+      console.log('Form data:', data, 'UTM:', window.mypaulUtmTracker?.getStoredUtm());
+
       // FB event
       // fbq('track', 'CompleteRegistration', data);
 
