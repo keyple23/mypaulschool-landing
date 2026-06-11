@@ -2019,15 +2019,22 @@
         form_name: 'floating_cta',
       });
 
-     fetch(FORM_URL, {
+   fetch(FORM_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: body
       }).finally(function() {
-        // ★ 추가된 메타 픽셀 (잠재 고객) 이벤트
+        // ★ 1. 메타 픽셀 (잠재 고객) 이벤트 전송
         fbq('track', 'Lead'); 
+
+        // ★ 2. GA4 (리드 생성) 이벤트 전송
+        gtag('event', 'generate_lead', {
+          event_category: 'lead',
+          form_type: 'float_cta'
+        });
         
+        // 폼 숨기고 완료 메시지 띄우기 및 좌석 수/텍스트 업데이트
         document.getElementById('floatForm').style.display = 'none';
         document.getElementById('floatSuccess').style.display = 'block';
         document.querySelectorAll('.schedule-spots').forEach(function(el) {
@@ -2037,7 +2044,6 @@
         if (label) label.textContent = '🔥 7월 오프라인 설명회 잔여 11석';
       });
     }
-
     /* ===== INTERSECTION OBSERVER — SCROLL ANIMATIONS ===== */
     const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
     const observer = new IntersectionObserver((entries) => {
