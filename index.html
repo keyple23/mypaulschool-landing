@@ -137,9 +137,8 @@
 
     /* ===== STICKY HEADER ===== */
     .topbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1100;
+      position: relative;
+      z-index: 2;
       background: var(--navy-light);
       color: #fff;
       display: flex;
@@ -162,9 +161,8 @@
     }
     @keyframes tbblink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
     .site-header {
-      position: fixed;
-      top: 42px; left: 0; right: 0;
-      z-index: 1000;
+      position: relative;
+      z-index: 1;
       background: rgba(255,255,255,0.96);
       border-bottom: 1px solid rgba(0,0,0,0.06);
       box-shadow: 0 2px 12px rgba(23,37,76,0.06);
@@ -237,7 +235,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 136px 20px 60px;
+      padding: 72px 20px 60px;
       position: relative;
       overflow: hidden;
     }
