@@ -75,8 +75,8 @@
 
     /* ===== DESIGN TOKENS ===== */
     :root {
-      --navy: #17254C;
-      --navy-light: #263B66;
+      --navy: #0D3366;
+      --navy-light: #15498C;
       --gold: #D4A843;
       --gold-light: #F5C842;
       --accent: #3B82F6;
@@ -221,7 +221,7 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 80% 60% at 50% 20%, rgba(59,130,246,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 60% at 50% 20%, rgba(1,110,200,0.22) 0%, transparent 60%),
         radial-gradient(ellipse 60% 40% at 80% 80%, rgba(212,168,67,0.12) 0%, transparent 60%);
       pointer-events: none;
     }
@@ -273,40 +273,52 @@
     .hero-sub strong { color: #fff; font-weight: 800; }
     .hero-congrats {
       display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      background: rgba(212,168,67,0.12);
-      border: 1px solid rgba(212,168,67,0.4);
-      border-radius: 14px;
-      padding: 12px 20px;
+      align-items: stretch;
+      gap: 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      padding: 15px 24px;
       margin-bottom: 32px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.18);
     }
     .congrats-age {
-      font-size: clamp(1.9rem, 6.5vw, 2.7rem);
-      font-weight: 900;
+      display: flex;
+      align-items: center;
+      font-size: clamp(1.8rem, 6vw, 2.5rem);
+      font-weight: 800;
       color: var(--gold-light);
       line-height: 1;
       letter-spacing: -1.5px;
+      padding-right: 20px;
+      border-right: 1px solid rgba(212,168,67,0.35);
     }
     .congrats-lines {
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: flex-start;
-      gap: 5px;
+      gap: 7px;
       text-align: left;
     }
     .congrats-top {
-      font-size: clamp(0.8rem, 2.6vw, 0.95rem);
-      color: rgba(255,255,255,0.82);
-      font-weight: 600;
+      font-size: clamp(0.78rem, 2.4vw, 0.9rem);
+      color: rgba(255,255,255,0.62);
+      font-weight: 500;
+      letter-spacing: 0.4px;
     }
     .congrats-main {
-      font-size: clamp(0.95rem, 3vw, 1.15rem);
+      font-size: clamp(1rem, 3.1vw, 1.2rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.3px;
+    }
+    .congrats-main b {
+      color: var(--gold-light);
       font-weight: 800;
-      color: var(--navy);
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      padding: 3px 10px;
-      border-radius: 6px;
+      margin-left: 2px;
     }
     .hero-cta-group {
       display: flex;
@@ -936,7 +948,7 @@
 
     /* ===== SECTION 11: URGENCY / WAITLIST ===== */
     #waitlist {
-      background: linear-gradient(135deg, var(--navy), #0D1B4D);
+      background: linear-gradient(135deg, var(--navy), #082A55);
       padding: 72px 20px;
       text-align: center;
       position: relative;
@@ -1347,8 +1359,8 @@
     <div class="hero-congrats reveal delay-1">
       <span class="congrats-age">25세</span>
       <span class="congrats-lines">
-        <span class="congrats-top">연세대, GIST 박사</span>
-        <span class="congrats-main">삼성연구원 / 로보틱스 연구원 합격</span>
+        <span class="congrats-top">연세대 · GIST 박사</span>
+        <span class="congrats-main">삼성연구원 / 로보틱스 연구원 <b>합격</b></span>
       </span>
     </div>
 
@@ -1597,7 +1609,7 @@
         <!-- 기사 1: 위클리피플 2025.10.15 -->
         <a class="news-card-link" href="https://www.weeklypeople.net/view.do?seq=22542" target="_blank" rel="noopener">
           <div class="news-card">
-            <div class="news-card-thumb" style="background:#1A2755">
+            <div class="news-card-thumb" style="background:#103B74">
               <span class="news-card-thumb-label">위클리피플</span>
               <img src="http://www.weeklypeople.net/upload_new/20251015/mypaul.png" alt="마이폴학교" onerror="this.style.display='none'" />
               <span class="news-card-thumb-icon" style="position:absolute">📰</span>
@@ -1612,7 +1624,7 @@
         <!-- 기사 2: 글로벌에픽 2025.04.09 -->
         <a class="news-card-link" href="https://www.globalepic.co.kr/view.php?ud=2025040914282050296cf2d78c68_29" target="_blank" rel="noopener">
           <div class="news-card">
-            <div class="news-card-thumb" style="background:#1A2755">
+            <div class="news-card-thumb" style="background:#103B74">
               <span class="news-card-thumb-label">글로벌에픽</span>
               <img src="https://cgeimage.commutil.kr/phpwas/restmb_allidxmake.php?pp=002&idx=3&simg=20250409142854018296cf2d78c681439208141.jpg&nmt=29" alt="몽골 MOU" onerror="this.style.display='none'" />
               <span class="news-card-thumb-icon" style="position:absolute">🌏</span>
@@ -1627,7 +1639,7 @@
         <!-- 기사 3: 조선에듀 2025.11.14 -->
         <a class="news-card-link" href="https://edu.chosun.com/site/data/html_dir/2025/11/14/2025111480129.html" target="_blank" rel="noopener">
           <div class="news-card">
-            <div class="news-card-thumb" style="background:#1A2755">
+            <div class="news-card-thumb" style="background:#103B74">
               <span class="news-card-thumb-label">조선에듀</span>
               <img src="https://edu.chosun.com/site/data/img_dir/2025/11/14/2025111480129_0.jpg" alt="마이폴학교 기사" onerror="this.style.display='none'" />
               <span class="news-card-thumb-icon" style="position:absolute">📰</span>
@@ -1642,7 +1654,7 @@
         <!-- 기사 4: 조선에듀 2025.08.27 -->
         <a class="news-card-link" href="https://edu.chosun.com/site/data/html_dir/2025/08/27/2025082780119.html" target="_blank" rel="noopener">
           <div class="news-card">
-            <div class="news-card-thumb" style="background:#1A2755">
+            <div class="news-card-thumb" style="background:#103B74">
               <span class="news-card-thumb-label">조선에듀</span>
               <img src="https://edu.chosun.com/site/data/img_dir/2025/08/27/2025082780119_0.jpg" alt="마이폴학교 기사" onerror="this.style.display='none'" />
               <span class="news-card-thumb-icon" style="position:absolute">📰</span>
@@ -1657,7 +1669,7 @@
         <!-- 기사 5: 여성동아 -->
         <a class="news-card-link" href="https://woman.donga.com/edu/article/all/12/5768350/1" target="_blank" rel="noopener">
           <div class="news-card">
-            <div class="news-card-thumb" style="background:#2A1A3A">
+            <div class="news-card-thumb" style="background:#103B74">
               <span class="news-card-thumb-label">여성동아</span>
               <img src="https://woman.donga.com/ogimage/2024/05/5768350.jpg" alt="여성동아 마이폴" onerror="this.style.display='none'" />
               <span class="news-card-thumb-icon" style="position:absolute">📰</span>
