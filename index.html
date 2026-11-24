@@ -140,17 +140,19 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(23,37,76,0.97);
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 2px 12px rgba(23,37,76,0.06);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      padding: 12px 20px;
+      padding: 10px 20px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       transition: background 0.3s;
     }
     .header-logo img {
-      height: 32px;
+      height: 42px;
       width: auto;
       display: block;
     }
@@ -265,10 +267,33 @@
       font-size: clamp(1rem, 3.5vw, 1.35rem);
       color: rgba(255,255,255,0.75);
       line-height: 1.6;
-      margin-bottom: 32px;
+      margin-bottom: 18px;
       font-weight: 400;
     }
     .hero-sub strong { color: #fff; font-weight: 700; }
+    .hero-congrats {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(212,168,67,0.12);
+      border: 1px solid rgba(212,168,67,0.4);
+      color: #fff;
+      font-size: clamp(0.92rem, 3vw, 1.1rem);
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 12px;
+      margin-bottom: 32px;
+    }
+    .congrats-label {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 0.82rem;
+      padding: 4px 11px;
+      border-radius: 7px;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
     .hero-cta-group {
       display: flex;
       flex-direction: column;
@@ -1289,8 +1314,8 @@
   <!-- HEADER -->
   <header class="site-header">
     <div class="header-logo">
-      <img src="https://mypaul.org/wp-content/uploads/2023/04/logo-w.png" alt="마이폴학교" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
-      <span style="display:none;color:#fff;font-size:1.1rem;font-weight:900">마이<span style="color:var(--gold)">폴</span>학교</span>
+      <img src="assets/logo.png" alt="마이폴학교 MY PAUL SCHOOL" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+      <span style="display:none;color:var(--navy);font-size:1.1rem;font-weight:900">마이<span style="color:#1a9d4a">폴</span>학교</span>
     </div>
   </header>
 
@@ -1302,8 +1327,13 @@
       내가 원하는 관심사로<br><span class="highlight">10대에 대학원을 가는 미래학교</span>
     </h1>
     <p class="hero-sub reveal delay-1">
-      입시 준비 대신 <strong>연구를 합니다.</strong>
+      교육이 좋으면 <strong>성과도 좋습니다.</strong>
     </p>
+
+    <div class="hero-congrats reveal delay-1">
+      <span class="congrats-label">경 축</span>
+      25세 삼성 글로벌 리서치 연구원 합격
+    </div>
 
     <div class="hero-stats reveal delay-2">
       <div class="hero-stat">
